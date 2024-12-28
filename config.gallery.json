@@ -1,22 +1,24 @@
 {
   "albums": [
     {
-      "title": "me",
-      "route": "me",
+      "title": "fotinha",
+      "route": "fotinha",
       "coverImageSrc": "https://lh3.googleusercontent.com/p2A31eJoSiiH8aF6E7GRU-2vUJTeqNBTnnuo0OmSu_lI831St_sMU_D4vNd6_vFJvIISkFiRYJgwnmTs=w544-h544-l90-rj",
       "posts": [
         {
-          "title": "skate",
-          "src": "/assets/me/skate-yellow-flowers.jpg"
-        },
+          "title": "toduro",
+          "src": "/assets/img/toduro.png"
+        }
+      ]
+    },
+    {
+      "title": "fotinha2",
+      "route": "fotinha2",
+      "coverImageSrc": "https://lh3.googleusercontent.com/p2A31eJoSiiH8aF6E7GRU-2vUJTeqNBTnnuo0OmSu_lI831St_sMU_D4vNd6_vFJvIISkFiRYJgwnmTs=w544-h544-l90-rj",
+      "posts": [
         {
-          "title": "focus",
-          "src": "/assets/me/back.jpg"
-        },
-        {
-          "title": "graffiti",
-          "src": "/assets/me/grafitti.jpg",
-          "videoSrc": ""
+          "title": "poatan",
+          "src": "/assets/img/poatan.png"
         }
       ]
     }

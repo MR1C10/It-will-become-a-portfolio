@@ -7,41 +7,32 @@
 - go to [config file](./config.json)
 ```json
 {
-    "nickname": "ustav",
-    "lanyard": {
-      "active": true, <  if you dont wish to use it, set to false
-      "discordId": "801073563368947742"
+  "nickname": "MR",
+  "lanyard": {
+    "active": true,
+    "discordId": "688597843833126963"
+  },
+  "accentColor": "#4c02b5",
+  "avatarImgSrc": "https://cdn.discordapp.com/avatars/688597843833126963/4d669411e4c3a7aee9f260580bec0147?size=1024",
+  "buttons": [
+    {
+      "title": "My Projects",
+      "link": "https://github.com/mr1c10?tab=repositories"
     },
-    "accentColor": "#4c02b5",
-    "avatarImgSrc": "/assets/profile.png",
-    "buttons": [
-      {
-        "title": "My Pokemon Game",
-        "link": "https://pokedoro-next.vercel.app/"
-      },
-      {
-        "title": "My Projects",
-        "link": "https://uprojects.vercel.app/"
-      },
-      {
-        "title": "Github",
-        "link": "https://github.com/xyztavo"
-      },
-      {
-        "title": "See this project code",
-        "link": "https://github.com/xyztavo/DaisyDevLinks"
-      }
-    ],
-    "githubLink": "https://github.com/xyztavo",
-    "instagramLink": "https://www.instagram.com/luna.gustah/",
-    "linkedInLink": "https://www.linkedin.com/in/gustavo-luna-6a33942aa/",
-    "discordLink": "https://discord.com/users/801073563368947742",
-    "ytMusicLink": "https://music.youtube.com/channel/UCazPZA5I0goXo85P_LAJAkA?si=FoBmOLIaz_O-aBJd",
-    "footer": "made with ❤️, ustav"
-  }
-  
+    {
+      "title": "Github",
+      "link": "https://github.com/mr1c10"
+    },
+    {
+      "title": "See this project code",
+      "link": "https://github.com/MR1C10/Testando"
+    }
+  ],
+  "githubLink": "https://github.com/mr1c10",
+  "instagramLink": "https://www.instagram.com/_mau_rodrigues/",
+  "linkedInLink": "https://www.linkedin.com/in/mr1c10",
+  "discordLink": "https://discord.com/users/688597843833126963",
+  "footer": "made with ❤️, M"
+}
 ```
-## screen shots
-<img src="./public/assets/ss1.png" />
-<img src="./public/assets/ss2.png" />
-<img src="./public/assets/ss3.png" />
+
