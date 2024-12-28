@@ -1,8 +1,8 @@
 {
   "albums": [
     {
-      "title": "fotinha",
-      "route": "fotinha",
+      "title": "Work",
+      "route": "Work",
       "coverImageSrc": "https://lh3.googleusercontent.com/p2A31eJoSiiH8aF6E7GRU-2vUJTeqNBTnnuo0OmSu_lI831St_sMU_D4vNd6_vFJvIISkFiRYJgwnmTs=w544-h544-l90-rj",
       "posts": [
         {
@@ -13,8 +13,8 @@
       ]
     },
     {
-      "title": "fotinha2",
-      "route": "fotinha2",
+      "title": "Life",
+      "route": "Life",
       "coverImageSrc": "https://lh3.googleusercontent.com/p2A31eJoSiiH8aF6E7GRU-2vUJTeqNBTnnuo0OmSu_lI831St_sMU_D4vNd6_vFJvIISkFiRYJgwnmTs=w544-h544-l90-rj",
       "posts": [
         {
