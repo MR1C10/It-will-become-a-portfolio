@@ -7,7 +7,8 @@
       "posts": [
         {
           "title": "toduro",
-          "src": "/assets/img/toduro.png"
+          "src": "/assets/img/toduro.png",
+          "videoSrc": ""
         }
       ]
     },
@@ -18,7 +19,8 @@
       "posts": [
         {
           "title": "poatan",
-          "src": "/assets/img/poatan.png"
+          "src": "/assets/img/poatan.png",
+          "videoSrc": ""
         }
       ]
     }
