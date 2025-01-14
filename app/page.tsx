@@ -16,11 +16,11 @@ import axios from "axios";
 import { Badge } from "@nextui-org/badge";
 import { Tooltip } from "@nextui-org/tooltip";
 
-import * as gallery from "../config.gallery.json";
-import * as config from "../config.json";
+import gallery from "../config.gallery";
+import config from "../config";
 
 import { ThemeSwitch } from "@/components/theme-switch";
-import { DiscordIcon } from "@/components/icons";
+import { DiscordIcon, SpotifyIcon } from "@/components/icons";
 export interface Response {
   data: Data;
   success: boolean;
@@ -105,12 +105,22 @@ export default function Home() {
     <div className={"flex flex-col items-center justify-center gap-8"}>
       <div className="flex flex-col items-center gap-4">
         {data?.data.spotify && (
-          <Button
-            className="shadow-custom bg-transparent hover:bg-primary max-w-64 text-foreground"
-            onPress={onSpotifyOpen} // This will trigger opening the modal
-          >
-            <Music /> {data.data.spotify.song && <>{data.data.spotify.song}</>}
-          </Button>
+          <div className="flex flex-row items-center justify-center gap-2">
+            <Button
+              isIconOnly
+              className="shadow-custom hover:text-white bg-transparent hover:bg-primary"
+              size="sm"
+              onPress={onSpotifyOpen}
+            >
+              <Music className="p-1" />
+            </Button>
+            <Button
+              className="shadow-custom bg-transparent hover:bg-primary max-w-60 text-foreground"
+              onPress={onSpotifyOpen} // This will trigger opening the modal
+            >
+              {data.data.spotify.song && <>{data.data.spotify.song}</>}
+            </Button>
+          </div>
         )}
         <Modal isOpen={isSpotifyOpen} onOpenChange={onSpotifyOpenChange}>
           <ModalContent>
@@ -118,34 +128,66 @@ export default function Home() {
               <>
                 <ModalHeader className="flex flex-col gap-1">
                   Currently Playing on Spotify
+                  {/* https://open.spotify.com/track/3JQUIVHsxgnMAyXqbZU5zO */}
                 </ModalHeader>
                 <ModalBody className="flex flex-col items-center justify-center gap-4">
                   <div className="flex flex-col items-center">
-                    {data?.data.spotify?.album_art_url && (
-                      <img
-                        src={data.data.spotify.album_art_url} // Safe access
-                        alt="Album Art"
-                        className="w-32 h-32 rounded-lg"
-                      />
-                    )}
-                    {data?.data.spotify?.song && (
-                      <h2 className="text-xl font-bold mt-2">
-                        {data.data.spotify.song}
-                      </h2>
-                    )}
-                    {data?.data.spotify?.artist && (
-                      <p className="text-sm">
-                        Artist: {data.data.spotify.artist}
-                      </p>
-                    )}
-                    {data?.data.spotify?.album && (
-                      <p className="text-sm">
-                        Album: {data.data.spotify.album}
-                      </p>
+                    {data?.data.spotify?.track_id && (
+                      <a
+                        className="hover:scale-110 transition-transform flex flex-col items-center"
+                        href={`https://open.spotify.com/track/${data?.data.spotify?.track_id}`}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {data?.data.spotify?.album_art_url && (
+                          <img
+                            alt="Album Art"
+                            className="w-32 h-32 rounded-lg"
+                            src={data.data.spotify.album_art_url} // Safe access
+                          />
+                        )}
+                        {data?.data.spotify?.song && (
+                          <h2 className="text-xl font-bold mt-2 underline">
+                            {data.data.spotify.song}
+                          </h2>
+                        )}
+                        {data?.data.spotify?.artist && (
+                          <p className="text-sm">
+                            Artist: {data.data.spotify.artist}
+                          </p>
+                        )}
+                        {data?.data.spotify?.album && (
+                          <p className="text-sm">
+                            Album: {data.data.spotify.album}
+                          </p>
+                        )}
+                      </a>
                     )}
                   </div>
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter className="flex flex-row justify-between">
+                  {data?.data.spotify?.track_id && (
+                    <>
+                      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-static-element-interactions */}
+                      <div
+                        className="relative w-10 h-10 rounded-md border-none transition-transform duration-300 hover:cursor-pointer hover:scale-110 overflow-hidden"
+                        onClick={() =>
+                          window.open(
+                            `https://open.spotify.com/track/${data?.data.spotify?.track_id}`,
+                            "_blank"
+                          )
+                        }
+                      >
+                        <img
+                          alt="a gif of a cat jamming to the music."
+                          className="w-full h-full"
+                          src="/assets/cat-jam.gif"
+                        />
+                        <span className="absolute inset-0 bg-gradient-to-tr from-transparent to-primary opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    </>
+                  )}
+
                   <Button
                     className="text-white"
                     color="primary"
@@ -170,37 +212,31 @@ export default function Home() {
               <Tooltip
                 color="primary"
                 content={
-                  data.data.activities[0] && (
-                    <div className="flex flex-col items-center justify-center text-center p-2">
-                      <h1 className="text-center">
-                        Currently on:{" "}
-                        <span className="font-bold">
-                          {data.data.activities[data.data.activities.length - 1]
-                            .name &&
-                            data.data.activities[
-                              data.data.activities.length - 1
-                            ].name}
-                        </span>
-                      </h1>
-                      <div className="text-sm flex flex-col">
-                        <h2>
-                          {data.data.activities[data.data.activities.length - 1]
-                            .state &&
-                            data.data.activities[
-                              data.data.activities.length - 1
-                            ].state}
-                        </h2>
-                        <h2>
-                          {data.data.activities[data.data.activities.length - 1]
-                            .details &&
-                            data.data.activities[
-                              data.data.activities.length - 1
-                            ].details}
-                        </h2>
-                      </div>
+                  data.data.activities.length > 0 && (
+                    <div className="flex flex-col text-white items-center justify-center text-center p-2">
+                      {data.data.activities
+                        .filter(
+                          (activity) =>
+                            activity.name &&
+                            !activity.name.includes("Spotify") &&
+                            !activity.name.includes("Custom Status")
+                        )
+                        .map((activity, index) => (
+                          <div key={index} className="mb-2">
+                            <h1 className="text-center">
+                              Currently on:{" "}
+                              <span className="font-bold">{activity.name}</span>
+                            </h1>
+                            <div className="text-sm flex flex-col">
+                              {activity.state && <h2>{activity.state}</h2>}
+                              {activity.details && <h2>{activity.details}</h2>}
+                            </div>
+                          </div>
+                        ))}
                     </div>
                   )
                 }
+                placement="bottom"
                 showArrow={false}
               >
                 <Avatar
@@ -289,7 +325,7 @@ export default function Home() {
             key={button.link}
             className="text-foreground hover:text-white hover:bg-primary bg-transparent w-64 shadow-custom"
             size="lg"
-            onClick={() => window.open(button.link, "_blank")}
+            onPress={() => window.open(button.link, "_blank")}
           >
             {button.title}
           </Button>
@@ -301,7 +337,7 @@ export default function Home() {
             isIconOnly
             className="text-foreground hover:text-white bg-transparent shadow-custom hover:bg-slate-800"
             size="sm"
-            onClick={() => window.open(config.githubLink, "_blank")}
+            onPress={() => window.open(config.githubLink, "_blank")}
           >
             <Github />
           </Button>
@@ -311,7 +347,7 @@ export default function Home() {
             isIconOnly
             className="relative text-foreground bg-transparent hover:text-white shadow-custom overflow-hidden rounded-md transition-all duration-300 group"
             size="sm"
-            onClick={() => window.open(config.instagramLink, "_blank")}
+            onPress={() => window.open(config.instagramLink, "_blank")}
           >
             {/* Gradient background */}
             <span className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -326,7 +362,7 @@ export default function Home() {
             isIconOnly
             className="text-foreground hover:text-white bg-transparent shadow-custom hover:bg-[#7289da]"
             size="sm"
-            onClick={() => window.open(config.discordLink, "_blank")}
+            onPress={() => window.open(config.discordLink, "_blank")}
           >
             <DiscordIcon />
           </Button>
@@ -336,7 +372,7 @@ export default function Home() {
             isIconOnly
             className="text-foreground hover:text-white bg-transparent shadow-custom hover:bg-[#0e76a8]"
             size="sm"
-            onClick={() => window.open(config.linkedInLink, "_blank")}
+            onPress={() => window.open(config.linkedInLink, "_blank")}
           >
             <Linkedin />
           </Button>
@@ -346,9 +382,19 @@ export default function Home() {
             isIconOnly
             className="text-foreground hover:text-white bg-transparent shadow-custom hover:bg-[#da1a1a]"
             size="sm"
-            onClick={() => window.open(config.ytMusicLink, "_blank")}
+            onPress={() => window.open(config.ytMusicLink, "_blank")}
           >
             <Music />
+          </Button>
+        )}
+        {config.spotifyLink && (
+          <Button
+            isIconOnly
+            className="text-foreground hover:text-white bg-transparent shadow-custom hover:bg-[#1DB954]"
+            size="sm"
+            onPress={() => window.open(config.spotifyLink, "_blank")}
+          >
+            <SpotifyIcon />
           </Button>
         )}
       </div>
