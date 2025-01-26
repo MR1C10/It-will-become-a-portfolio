@@ -5,6 +5,7 @@
 - supports discord activities through [lanyard](https://github.com/Phineas/lanyard)
 ## usage
 - go to [config file](https://raw.githubusercontent.com/xyztavo/ulinked/refs/heads/main/config.json)
+
 ```typescript
   import { Config } from "./types/config";
 
